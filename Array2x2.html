@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sistema 2x2</title>
+	<link rel="stylesheet" type="text/css" href="style/estiloArray.css">
+</head>
+<body>
+
+	<div class="title">
+		<h1>Solução de Sistemas 2x2</h1>
+		<h3 id="po">Segundo: Insira os coeficientes</h3>
+	</div>
+
+
+	<div class="container">
+		<form class="input" action="index.html" method="post">
+			<input type="text" name="array[]" placeholder="0"  class="v1" /><label>X +</label>
+			<input type="text" name="array[]" placeholder="0"  class="v2" /><label>Y</label> <label>   =</label>
+			<input type="text" name="array[]" placeholder="0"  class="v3" /><br>
+
+			<input type="text" name="array[]" placeholder="0"  class="v4" /><label>X +</label>
+			<input type="text" name="array[]" placeholder="0"  class="v5" /><label>Y</label> <label>   =</label>
+			<input type="text" name="array[]" placeholder="0"  class="v6" /><br>
+
+
+			<button type="button" name="button" onclick="resolver()">
+				Calcular
+			</button>
+		</form>
+	</div>
+
+	<div class="tables">
+
+		<div class="ajuste">    		
+			<h2 id="Aumentada"></h2>
+
+			<table id ="tg" style="border: 2px solid transparent">
+				<tbody>
+					<tr>
+						<td id = "r1"></td>
+						<td id = "r2"></td>
+						<td id = "r3"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td id="r4"></td>
+						<td id="r5"></td>
+						<td id="r6"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<div class="ajuste">
+			<h2 id="Escalonada"></h2>
+			<table id ="tf" style="border: 2px solid transparent">
+				<tbody>
+					<tr>
+						<td id ="e1"></td>
+						<td id="e2"></td>
+						<td id="e3"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td id="e4" style="color: rgb(0,255,184)"></td>
+						<td id="e5"></td>
+						<td id="e6"></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+
+		<div class="resposta">
+			<h2 id="solucao"></h2>
+			<h3 id="solucaoX"></h3>
+			<h3 id="solucaoY"></h3>
+		</div>   	
+	</div> 
+
+	<div class="voltar">
+		<a href="Index.html">Voltar</a>
+	</div>
+
+	<script type="text/javascript">
+
+		function resolver(){
+
+        	//Recuperar valores inseridos 
+        	const a = parseFloat(document.querySelector(".v1").value);
+        	const b = parseFloat(document.querySelector(".v2").value);
+        	const c = parseFloat(document.querySelector(".v3").value);
+        	const d = parseFloat(document.querySelector(".v4").value);
+        	const e = parseFloat(document.querySelector(".v5").value);
+        	const f = parseFloat(document.querySelector(".v6").value);
+
+        	//Iniciando Matriz Original e Matriz Temporária
+        	var matriz = [ [a,b,c],
+        	[d,e,f] ];
+
+        	var temp = [ [0,0,0],
+        	[0,0,0] ];
+
+           	//Inverte Matrizes se "a" = 0
+           	if (matriz[0][0] == 0) {
+           		temp[0][0] = matriz[1][0];	matriz[1][0] = matriz[0][0]; matriz[0][0] = temp[0][0];
+           		temp[0][1] = matriz[1][1];	matriz[1][1] = matriz[0][1]; matriz[0][1] = temp[0][1];
+           		temp[0][2] = matriz[1][2];	matriz[1][2] = matriz[0][2]; matriz[0][2] = temp[0][2];
+           	}
+
+            //Escreve a matriz 
+            document.getElementById("Aumentada").innerHTML = "Matriz Aumentada: "
+            document.getElementById("r1").innerHTML = matriz[0][0];
+            document.getElementById("r2").innerHTML = matriz[0][1];
+            document.getElementById("r3").innerHTML = matriz[0][2];
+            document.getElementById("r4").innerHTML = matriz[1][0];
+            document.getElementById("r5").innerHTML = matriz[1][1];
+            document.getElementById("r6").innerHTML = matriz[1][2];
+
+            //Calculo do Determinante
+            det = (matriz[0][0] * matriz[1][1]) - (matriz[0][1] * matriz[1][0]);
+            
+            //Verificação de possibilidade de resolução
+            if(det != 0){
+
+            	//Coeficiente de conversão
+            	const coef = -1.0 * (matriz[1][0] / matriz[0][0]);
+            	
+            	//Escalonamento 
+            	for (j = 0; j < 3; j++) {
+            		matriz[1][j] = (parseFloat(matriz[1][j]) + (parseFloat(coef) * parseFloat(matriz[0][j]))).toFixed(2);
+            	}
+
+            	//Escreve a matriz escalonada
+            	document.getElementById("Escalonada").innerHTML = "Matriz Escalonanda: ";
+            	document.getElementById("e1").innerHTML = matriz[0][0];
+            	document.getElementById("e2").innerHTML = matriz[0][1];
+            	document.getElementById("e3").innerHTML = matriz[0][2];
+            	document.getElementById("e4").innerHTML = matriz[1][0];
+            	document.getElementById("e5").innerHTML = matriz[1][1];
+            	document.getElementById("e6").innerHTML = matriz[1][2];
+
+            	//Calculo das soluções 
+            	const solucaoY = parseFloat(matriz[1][2]) / parseFloat(matriz[1][1]);
+            	const solucaoX = (parseFloat(matriz[0][2]) - (solucaoY * parseFloat(matriz[0][1]))) / parseFloat(matriz[0][0]);
+
+             	//Escreve a Solução
+             	document.getElementById("solucao").innerHTML = "Solução do Sistema: ";
+             	document.getElementById("solucaoX").innerHTML = "X = " + (solucaoX).toFixed(2);
+             	document.getElementById("solucaoY").innerHTML = "; Y = " + (solucaoY).toFixed(2);
+
+             } else if (det == 0){
+
+             	document.getElementById("Escalonada").innerHTML = "Matriz Escalonanda: "; 
+
+             	document.getElementById("e1").innerHTML = "-";
+            	document.getElementById("e2").innerHTML = "-";
+            	document.getElementById("e3").innerHTML = "-";
+            	document.getElementById("e4").innerHTML = "-";
+            	document.getElementById("e5").innerHTML = "-";
+            	document.getElementById("e6").innerHTML = "-";
+
+             	document.getElementById("solucaoX").innerHTML =	"O Sistema é SPI ou SI. Não foi possível resolver o sistema.";	
+             	document.getElementById("solucaoY").innerHTML =	"";
+
+             }	
+
+            //"Cria" a matriz
+            document.getElementById("tg").style.borderLeft = "2px solid white";
+            document.getElementById("tg").style.borderRight = "2px solid white";
+
+            document.getElementById("tf").style.borderLeft = "2px solid white";
+            document.getElementById("tf").style.borderRight = "2px solid white";
+
+        }
+    </script>
+
+</body>
+</html>

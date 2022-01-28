@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sistema 4x4</title>
+
+	<link rel="stylesheet" type="text/css" href="style/estiloArray.css">
+	
+	<style type="text/css">
+		.container{	padding-top: 10px ;}
+		.title {margin-top: 20px;}
+		.title h3{padding-top: 3px;}
+	</style>
+
+</head>
+<body>
+
+	<div class="title">
+		<h1>Solução de Sistemas 4x4</h1>  
+		<h3 id="po">Segundo: Insira os coeficientes</h3>
+	</div>
+
+	<div class="container">
+		<form class="input" action="index.html" method="post">
+
+			<input type="text" name="array[]" placeholder="0"  class="v1" /><label>X +</label>
+			<input type="text" name="array[]" placeholder="0"  class="v2" /><label>Y +</label> 
+			<input type="text" name="array[]" placeholder="0"  class="v3" /><label>Z +</label>
+			<input type="text" name="array[]" placeholder="0"  class="v4" /><label>W</label><label>   =</label>
+			<input type="text" name="array[]" placeholder="0"  class="v5" /><br>
+
+			<input type="text" name="array[]" placeholder="0"  class="v6" /><label>X +</label>
+			<input type="text" name="array[]" placeholder="0"  class="v7" /><label>Y +</label> 
+			<input type="text" name="array[]" placeholder="0"  class="v8" /><label>Z +</label>
+			<input type="text" name="array[]" placeholder="0"  class="v9" /><label>W</label><label>   =</label>
+			<input type="text" name="array[]" placeholder="0"  class="v10" /><br>
+
+			<input type="text" name="array[]" placeholder="0"  class="v11" /><label>X +</label>
+			<input type="text" name="array[]" placeholder="0"  class="v12" /><label>Y +</label> 
+			<input type="text" name="array[]" placeholder="0"  class="v13" /><label>Z +</label>
+			<input type="text" name="array[]" placeholder="0"  class="v14" /><label>W</label><label>   =</label>
+			<input type="text" name="array[]" placeholder="0"  class="v15" /><br>
+
+			<input type="text" name="array[]" placeholder="0"  class="v16" /><label>X +</label>
+			<input type="text" name="array[]" placeholder="0"  class="v17" /><label>Y +</label> 
+			<input type="text" name="array[]" placeholder="0"  class="v18" /><label>Z +</label>
+			<input type="text" name="array[]" placeholder="0"  class="v19" /><label>W</label><label>   =</label>
+			<input type="text" name="array[]" placeholder="0"  class="v20" /><br>
+
+
+			<button type="button" name="button" onclick="resolver()">
+				Calcular
+			</button>
+		</form>		
+	</div>
+	
+
+	<div class="table">
+		
+		<div class="ajuste">
+			<h2 id="Aumentada"></h2>
+			<table id="tg" style="border: 2px solid transparent">
+				<tbody>
+					<tr>
+						<td id="r1"></td>
+						<td id="r2"></td>
+						<td id="r3"></td>
+						<td id="r4"></td>
+						<td id="r5"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td id="r6"></td>
+						<td id="r7"></td>
+						<td id="r8"></td>
+						<td id="r9"></td>
+						<td id="r10"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td id="r11"></td>
+						<td id="r12"></td>
+						<td id="r13"></td>
+						<td id="r14"></td>
+						<td id="r15"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td id="r16"></td>
+						<td id="r17"></td>
+						<td id="r18"></td>
+						<td id="r19"></td>
+						<td id="r20"></td>
+					</tr>
+				</tbody>
+			</table>			
+		</div>
+
+		<div class="ajuste">
+			<h2 id="Escalonada"></h2>
+			<table id ="tf" style="border: 2px solid transparent">
+				<tbody>
+					<tr>
+						<td id="e1"></td>
+						<td id="e2"></td>
+						<td id="e3"></td>
+						<td id="e4"></td>
+						<td id="e5"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td id="e6"  style="color: rgb(0,255,184)"></td>
+						<td id="e7"></td>
+						<td id="e8"></td>
+						<td id="e9"></td>
+						<td id="e10"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td id="e11"  style="color: rgb(0,255,184)"></td>
+						<td id="e12"  style="color: rgb(0,255,184)"></td>
+						<td id="e13"></td>
+						<td id="e14"></td>
+						<td id="e15"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td id="e16"  style="color: rgb(0,255,184)"></td>
+						<td id="e17"  style="color: rgb(0,255,184)"></td>
+						<td id="e18"  style="color: rgb(0,255,184)"></td>
+						<td id="e19"></td>
+						<td id="e20"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="resposta">
+			<h2 id="solucao"></h2>
+			<h3 id="solucaoX"></h3>
+			<h3 id="solucaoY"></h3>
+			<h3 id="solucaoZ"></h3>
+			<h3 id="solucaoW"></h3>
+		</div>   
+		
+	</div> 
+
+	<div class = "voltar">
+		<a href="Index.html">Voltar</a>
+	</div>
+
+	<script type="">
+
+		function resolver(){
+
+			//Recupera valores inseridos
+			var a = parseFloat(document.querySelector(".v1").value);
+    		var b = parseFloat(document.querySelector(".v2").value);
+    		var c = parseFloat(document.querySelector(".v3").value);
+    		var d = parseFloat(document.querySelector(".v4").value);
+    		var e = parseFloat(document.querySelector(".v5").value);
+    		var f = parseFloat(document.querySelector(".v6").value);
+    		var g = parseFloat(document.querySelector(".v7").value);
+    		var h = parseFloat(document.querySelector(".v8").value);
+    		var i = parseFloat(document.querySelector(".v9").value);
+    		var j = parseFloat(document.querySelector(".v10").value);
+    		var k = parseFloat(document.querySelector(".v11").value);
+    		var l = parseFloat(document.querySelector(".v12").value);
+    		var m = parseFloat(document.querySelector(".v13").value);
+    		var n = parseFloat(document.querySelector(".v14").value);
+    		var o = parseFloat(document.querySelector(".v15").value);
+    		var p = parseFloat(document.querySelector(".v16").value);
+    		var q = parseFloat(document.querySelector(".v17").value);
+    		var r = parseFloat(document.querySelector(".v18").value);
+    		var s = parseFloat(document.querySelector(".v19").value);
+    		var t = parseFloat(document.querySelector(".v20").value);
+
+    		//Iniciando Matriz Original, Matriz Temporária e Matrizes para Determinantes
+        	var matriz = [ [a,b,c,d,e],[f,g,h,i,j],[k,l,m,n,o],[p,q,r,s,t]];
+
+        	var temp = [ [0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0] ];
+
+        	var matA = [[a,b,c,d],[f,g,h,i],[k,l,m,n],[p,q,r,s]];
+        	var matB = [[e,j,o,t],[f,g,h,i],[k,l,m,n],[p,q,r,s]];
+        	var matC = [[a,b,c,d],[e,j,o,t],[k,l,m,n],[p,q,r,s]];
+        	var matD = [[a,b,c,d],[f,g,h,i],[e,j,o,t],[p,q,r,s]];
+        	var matE = [[a,b,c,d],[f,g,h,i],[k,l,m,n],[e,j,o,t]];
+
+        	//Troca se "a" = 0
+        	if(matriz[0][0] == 0){
+           		temp[0][0] = matriz[1][0];	matriz[1][0] = matriz[0][0]; matriz[0][0] = temp[0][0];
+           		temp[0][1] = matriz[1][1];	matriz[1][1] = matriz[0][1]; matriz[0][1] = temp[0][1];
+           		temp[0][2] = matriz[1][2];	matriz[1][2] = matriz[0][2]; matriz[0][2] = temp[0][2];
+           		temp[0][3] = matriz[1][3];	matriz[1][3] = matriz[0][3]; matriz[0][3] = temp[0][3];
+           		temp[0][4] = matriz[1][4];	matriz[1][4] = matriz[0][4]; matriz[0][4] = temp[0][4];
+           	}
+
+        	//Escreve a matriz
+           	document.getElementById("Aumentada").innerHTML = "Matriz Aumentada: ";
+           	document.getElementById("r1").innerHTML = matriz[0][0];
+           	document.getElementById("r2").innerHTML = matriz[0][1];
+           	document.getElementById("r3").innerHTML = matriz[0][2];
+           	document.getElementById("r4").innerHTML = matriz[0][3];
+           	document.getElementById("r5").innerHTML = matriz[0][4];
+           	document.getElementById("r6").innerHTML = matriz[1][0];
+           	document.getElementById("r7").innerHTML = matriz[1][1];
+           	document.getElementById("r8").innerHTML = matriz[1][2];
+           	document.getElementById("r9").innerHTML = matriz[1][3];
+           	document.getElementById("r10").innerHTML = matriz[1][4];
+           	document.getElementById("r11").innerHTML = matriz[2][0];
+           	document.getElementById("r12").innerHTML = matriz[2][1];
+           	document.getElementById("r13").innerHTML = matriz[2][2];
+           	document.getElementById("r14").innerHTML = matriz[2][3];
+           	document.getElementById("r15").innerHTML = matriz[2][4];
+           	document.getElementById("r16").innerHTML = matriz[3][0];
+           	document.getElementById("r17").innerHTML = matriz[3][1];
+           	document.getElementById("r18").innerHTML = matriz[3][2];
+           	document.getElementById("r19").innerHTML = matriz[3][3];
+           	document.getElementById("r20").innerHTML = matriz[3][4];
+
+           	//Calculo do determinante
+           	var det = determinante(matA);
+           	var det2a = determinante(matB);
+           	var det2b =  determinante(matE);
+           	var det2c = determinante(matD);
+           	var det2d =  determinante(matE);
+
+          	//Verificando possibilidade de resolução
+          	if(det != 0){
+
+          		//Coeficientes de conversão 1
+            	const coef_10 = -1.0 * matriz[1][0] / matriz[0][0];
+            	const coef_20 = -1.0 * matriz[2][0] / matriz[0][0];
+            	const coef_30 = -1.0 * matriz[3][0] / matriz[0][0];
+
+            	
+            	//Escalonamento 1
+            	for (j = 0; j < 4; j++) {
+            		matriz[1][j] = (parseFloat(matriz[1][j]) + (parseFloat(coef_10) * parseFloat(matriz[0][j]))).toFixed(2); 
+            		matriz[2][j] = (parseFloat(matriz[2][j]) + (parseFloat(coef_20) * parseFloat(matriz[0][j]))).toFixed(2); 
+            		matriz[3][j] = (parseFloat(matriz[3][j]) + (parseFloat(coef_30) * parseFloat(matriz[0][j]))).toFixed(2); 
+            	}
+            		matriz[1][4] = -1*((parseFloat(coef_10) * parseFloat(matriz[0][4])) - parseFloat(matriz[1][4])).toFixed(2);
+            		matriz[2][4] = -1*((parseFloat(coef_20) * parseFloat(matriz[0][4])) - parseFloat(matriz[2][4])).toFixed(2);
+            		matriz[3][4] = -1*((parseFloat(coef_30) * parseFloat(matriz[0][4])) - parseFloat(matriz[3][4])).toFixed(2);
+
+            	if(matriz[1][1] == 0){
+            		temp[1][0] = matriz[1][0];	matriz[1][0] = matriz[3][0]; matriz[3][0] = temp[1][0];
+            		temp[1][1] = matriz[1][1];	matriz[1][1] = matriz[3][1]; matriz[3][1] = temp[1][1];
+            		temp[1][2] = matriz[1][2];	matriz[1][2] = matriz[3][2]; matriz[3][2] = temp[1][2];
+            		temp[1][3] = matriz[1][3];	matriz[1][3] = matriz[3][3]; matriz[3][3] = temp[1][3];
+            		temp[1][4] = matriz[1][4];	matriz[1][4] = matriz[3][4]; matriz[3][4] = temp[1][4];
+	           	}
+            	
+
+            	//Coeficientes de conversão 2
+            	 const coef_21 = -1.0 * matriz[2][1] / matriz[1][1];
+            	 const coef_31 = -1.0 * matriz[3][1] / matriz[1][1];
+	           
+	           	//Escalonamento 2
+            	for (j = 1; j < 5; j++) {    
+            		matriz[2][j] =  (parseFloat(matriz[2][j]) + (parseFloat(coef_21) * parseFloat(matriz[1][j]))).toFixed(2); 
+            		matriz[3][j] =  (parseFloat(matriz[3][j]) + (parseFloat(coef_31) * parseFloat(matriz[1][j]))).toFixed(2); 
+            	}
+
+            	//Coeficiente de conversão 3
+            	const coef_32 = -1.0 * matriz[3][2] / matriz[2][2];
+
+            	//Escalonamento 3
+            	for (j = 1; j < 5; j++) {    
+            		matriz[3][j] =  (parseFloat(matriz[3][j]) + (parseFloat(coef_32) * parseFloat(matriz[2][j]))).toFixed(2);
+            	}
+
+            	//Escreve a matriz Escalonada
+            	document.getElementById("Escalonada").innerHTML = "Matriz Escalonanda: ";
+          		document.getElementById("e1").innerHTML = matriz[0][0];
+            	document.getElementById("e2").innerHTML = matriz[0][1];
+            	document.getElementById("e3").innerHTML = matriz[0][2];
+            	document.getElementById("e4").innerHTML = matriz[0][3];
+            	document.getElementById("e5").innerHTML = matriz[0][4];
+
+            	document.getElementById("e6").innerHTML = matriz[1][0];
+            	document.getElementById("e7").innerHTML = matriz[1][1];
+            	document.getElementById("e8").innerHTML = matriz[1][2];
+            	document.getElementById("e9").innerHTML = matriz[1][3];
+            	document.getElementById("e10").innerHTML = matriz[1][4];
+
+            	document.getElementById("e11").innerHTML = matriz[2][0];
+            	document.getElementById("e12").innerHTML = matriz[2][1];
+            	document.getElementById("e13").innerHTML = matriz[2][2];
+            	document.getElementById("e14").innerHTML = matriz[2][3];
+            	document.getElementById("e15").innerHTML = matriz[2][4];
+
+            	document.getElementById("e16").innerHTML = matriz[3][0];
+            	document.getElementById("e17").innerHTML = matriz[3][1];
+            	document.getElementById("e18").innerHTML = matriz[3][2];
+            	document.getElementById("e19").innerHTML = matriz[3][3];
+            	document.getElementById("e20").innerHTML = matriz[3][4];
+
+            	//Calculo das soluções
+            	const solucaoW = ((matriz[3][4]) / matriz[3][3]).toFixed(2);
+            	const solucaoZ = ((matriz[2][4] - (solucaoW * matriz[2][3])) / matriz[2][2]).toFixed(2);
+            	const solucaoY = ((matriz[1][4] - (solucaoW * matriz[1][3]) - (solucaoZ * matriz[1][2])) / matriz[1][1]).toFixed(2);
+      
+				console.log(matriz[0][4] -(solucaoW * matriz[0][3]) - (solucaoZ * matriz[0][2]) - (solucaoY * matriz[0][1]));
+
+            	const solucaoX = ((matriz[0][4] - (solucaoW * matriz[0][3]) - (solucaoZ * matriz[0][2]) - (solucaoY * matriz[0][1])) 
+            					 / matriz[0][0]).toFixed(2);
+
+            	//Escreve as soluções 
+            	document.getElementById("solucao").innerHTML = "Solução do Sistema: ";
+            	document.getElementById("solucaoX").innerHTML = "X = " + solucaoX;
+            	document.getElementById("solucaoY").innerHTML = "; Y = " + solucaoY;
+            	document.getElementById("solucaoZ").innerHTML = "; Z = " + solucaoZ;
+            	document.getElementById("solucaoW").innerHTML = "; W = " + solucaoW;
+
+          	} else if((det == 0) && ((det2a != 0) || (det2b != 0) || (det2c != 0) || (det2d != 0))){
+
+          		document.getElementById("Escalonada").innerHTML = "Matriz Escalonanda: ";
+          		document.getElementById("e1").innerHTML = "-";
+            	document.getElementById("e2").innerHTML = "-";
+            	document.getElementById("e3").innerHTML = "-";
+            	document.getElementById("e4").innerHTML = "-";
+            	document.getElementById("e5").innerHTML = "-";
+
+            	document.getElementById("e6").innerHTML = "-";
+            	document.getElementById("e7").innerHTML = "-";
+            	document.getElementById("e8").innerHTML = "-";
+            	document.getElementById("e9").innerHTML = "-";
+            	document.getElementById("e10").innerHTML = "-";
+
+            	document.getElementById("e11").innerHTML = "-";
+            	document.getElementById("e12").innerHTML = "-";
+            	document.getElementById("e13").innerHTML = "-";
+            	document.getElementById("e14").innerHTML = "-";
+            	document.getElementById("e15").innerHTML = "-";
+
+            	document.getElementById("e16").innerHTML = "-";
+            	document.getElementById("e17").innerHTML = "-";
+            	document.getElementById("e18").innerHTML = "-";
+            	document.getElementById("e19").innerHTML = "-";
+            	document.getElementById("e20").innerHTML = "-"; 
+
+          		document.getElementById("solucao").innerHTML = "Solução do Sistema: ";
+          		document.getElementById("solucaoX").innerHTML =	"O Sistema é Impossivel (SI)";
+          		document.getElementById("solucaoY").innerHTML = "";
+          		document.getElementById("solucaoZ").innerHTML = "";
+          		document.getElementById("solucaoW").innerHTML = ""
+
+
+            } else if (det == 0 && det2a == 0 && det2b == 0 && det2c == 0 && det2d == 0){
+            	document.getElementById("Escalonada").innerHTML = "Matriz Escalonanda: ";
+          		document.getElementById("e1").innerHTML = "-";
+            	document.getElementById("e2").innerHTML = "-";
+            	document.getElementById("e3").innerHTML = "-";
+            	document.getElementById("e4").innerHTML = "-";
+            	document.getElementById("e5").innerHTML = "-";
+
+            	document.getElementById("e6").innerHTML = "-";
+            	document.getElementById("e7").innerHTML = "-";
+            	document.getElementById("e8").innerHTML = "-";
+            	document.getElementById("e9").innerHTML = "-";
+            	document.getElementById("e10").innerHTML = "-";
+
+            	document.getElementById("e11").innerHTML = "-";
+            	document.getElementById("e12").innerHTML = "-";
+            	document.getElementById("e13").innerHTML = "-";
+            	document.getElementById("e14").innerHTML = "-";
+            	document.getElementById("e15").innerHTML = "-";
+
+            	document.getElementById("e16").innerHTML = "-";
+            	document.getElementById("e17").innerHTML = "-";
+            	document.getElementById("e18").innerHTML = "-";
+            	document.getElementById("e19").innerHTML = "-";
+            	document.getElementById("e20").innerHTML = "-"; 
+
+            	document.getElementById("solucao").innerHTML = "Solução do Sistema: ";
+            	document.getElementById("solucaoX").innerHTML =	"O Sistema é Possivel, porém Indeterminado (SPI)";		
+            	document.getElementById("solucaoY").innerHTML = " ";
+          		document.getElementById("solucaoZ").innerHTML = " ";
+          		document.getElementById("solucaoW").innerHTML = " "
+            }
+
+            //"Cria" a matriz
+            document.getElementById("tg").style.borderLeft = "2px solid white";
+            document.getElementById("tg").style.borderRight = "2px solid white";
+
+            document.getElementById("tf").style.borderLeft = "2px solid white";
+            document.getElementById("tf").style.borderRight = "2px solid white";
+
+		}
+		
+		//Função para calculo dos Determinantes 
+		function determinante(a) {
+			var ordem = a.length;
+
+			if (ordem === 1) {
+				return a[0][0];
+			}
+
+			if (ordem === 2) {
+				return a[0][0] * a[1][1] - a[0][1] * a[1][0];
+			}
+
+			var det = 0;
+
+			for (var j = 0; j < ordem; j++) {
+				det += a[0][j] * cofator(a, 0, j);
+			}
+
+			return det;
+		}
+
+		//Função para calculo de cofaotores
+		function cofator(a, linha, coluna) {
+			var sub_matriz = [],
+			ordem = a.length,
+			m = 0;
+
+			for (var i = 1; i < ordem; i++) {
+				sub_matriz[m] = [];
+
+				for (var j = 0; j < ordem; j++) {
+					if (j !== coluna) {
+						sub_matriz[m].push(a[i][j]);
+					}
+				}
+				m++;
+			}
+
+		    return (coluna % 2 ? -1 : 1) * determinante(sub_matriz);
+		}
+		
+
+	</script>
+
+</body>
+</html>

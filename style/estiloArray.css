@@ -1,0 +1,121 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: consolas;
+	color: white;
+}
+body{
+	align-items: center;
+	text-align:  center;	
+	background: #091921;
+	/*background: #1d061a;*/
+}
+h2{	
+	text-decoration: underline rgba(0,255,184,0.9);
+	padding: 20px;
+}
+table{
+	text-align: center;
+	display: inline-block;
+	align-items: center;
+}
+td{
+	padding: 5px;
+	font-size: 20px;
+}
+.container button:hover, .voltar a:hover{
+	background-color:  rgb(0,255,184);
+	filter: drop-shadow(0 0 0.6rem rgb(0,255,184));
+}
+.container input:hover{
+	background-color:  rgb(0,255,184);
+	filter: drop-shadow(0 0 0.60rem rgb(0,255,184));
+}
+.resposta h3{
+	display: inline-block;
+}
+.resposta{
+	margin-top: 20px;
+}
+#tables{
+	display:  inline;
+}
+.title{
+	margin-top: 30px;
+	font-size: 1.5em;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	color: rgb(255,255,255);
+}
+.title h3{
+	padding-top: 20px;
+}
+.input input{    
+	position: relative;
+	text-align: center;
+	font-size: 21px;
+	width: 100px;
+	/* padding: 2px 3px 2px 4px; */
+	background: rgba(255,255,255,0.2);
+	box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
+	border-radius: 8px;
+	backdrop-filter: blur(10px); 
+	z-index: 1;
+	transition: 0.5s;
+	color: #fff;
+	height: 50px;
+}
+.input label{    
+	position: relative;
+	text-align: center;
+	font-size: 25px;
+	width: 100px;
+	padding: 10px 3px 2px 7px;
+	color: #fff;
+	height: 50px;
+}
+.container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding-top: 20px ;
+}
+.container button{
+	display: inline-block;
+	font-size: 1.1em;
+	color: #111;
+	background: #fff;
+	padding: 10px;
+	border-radius: 4px;
+	text-decoration: none;
+	font-weight: 700;
+	margin-top: 5px;
+	margin-top: 20px;
+}
+.voltar{ 
+	position: fixed;
+	top: 90%;
+	left: 90%;
+}
+.voltar a{
+	display: inline-block;
+	font-size: 1.1em;
+	color: #111;
+	background: #fff;
+	padding: 10px;
+	border-radius: 4px;
+	text-decoration: none;
+	font-weight: 700;
+	margin-top: 5px;
+}
+.table table{
+	border-left: 2px solid white;
+	border-right: 2px solid white;
+}
+.ajuste{
+	display: inline-block;
+	width: 45%;
+}
